@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>账户详情 - {{ account.name }}</h2>
+<p>余额：{{ account.balance }}</p>
+
+<h3>存款</h3>
+<form method="post" action="{{ url_for('main.deposit') }}">
+  <input type="hidden" name="acc_id" value="{{ account.id }}">
+  <label>金额: <input type="number" step="0.01" min="0" name="amount" required></label>
+  <button type="submit">存入</button>
+</form>
+
+<h3>取款</h3>
+<form method="post" action="{{ url_for('main.withdraw') }}">
+  <input type="hidden" name="acc_id" value="{{ account.id }}">
+  <label>金额: <input type="number" step="0.01" min="0" name="amount" required></label>
+  <button type="submit">取出</button>
+</form>
+
+<h3>转账</h3>
+<form method="post" action="{{ url_for('main.transfer') }}">
+  <input type="hidden" name="from_acc" value="{{ account.id }}">
+  <label>目标账户ID: <input type="number" name="to_acc" min="0" required></label><br>
+  <label>金额: <input type="number" step="0.01" min="0" name="amount" required></label><br>
+  <button type="submit">转账</button>
+</form>
+
+{% set type_map = {
+    'Deposit':      '存入',
+    'Withdraw':     '取出',
+    'Transfer Out': '转出',
+    'Transfer In':  '转入'
+} %}
+
+<h3>交易记录</h3>
+<table>
+  <tr><th>时间</th><th>类型</th><th>金额</th><th>备注</th></tr>
+  {% for txn in account.transactions %}
+  <tr>
+    <td>{{ txn.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+    <td>{{ type_map.get(txn.t_type, txn.t_type) }}</td>
+    <td>{{ txn.amount }}</td>
+    <td>{{ txn.other_account_id or '' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="{{ url_for('main.dashboard') }}">返回首页</a>
+{% endblock %}

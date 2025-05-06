@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>用户登录</h2>
+<form method="post">
+  <label>邮箱: <input type="email" name="email" required></label><br>
+  <label>密码: <input type="password" name="password" required></label><br>
+  <button type="submit">登录</button>
+</form>
+
+{# 如果有“请先完成邮箱验证”提示，则显示重发按钮 #}
+{% if msgs %}
+  <p style="color:red">{{ msgs[0] }}</p>
+  {% if '请先完成邮箱验证' in msgs[0] %}
+    <form method="post" action="{{ url_for('auth.resend_verification') }}">
+      <input type="hidden" name="email" value="{{ request.form.email }}">
+      <button type="submit">重发验证邮件</button>
+    </form>
+  {% endif %}
+{% endif %}
+
+<p>没有账号？<a href="{{ url_for('auth.register') }}">注册</a></p>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>我的账户</h2>
+<a href="{{ url_for('main.open_account') }}">新建账户</a><br><br>
+<table>
+  <tr><th>ID</th><th>账户名称</th><th>余额</th><th>状态</th><th>操作</th></tr>
+  {% for acc in accounts %}
+  <tr>
+    <td>{{ acc.id }}</td>
+    <td>{{ acc.name }}</td>
+    <td>{{ acc.balance }}</td>
+    <td>{{ '已锁定' if acc.is_locked else '正常' }}</td>
+    <td><a href="{{ url_for('main.view_account', acc_id=acc.id) }}">查看详情</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

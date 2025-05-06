@@ -1,0 +1,32 @@
+<!-- templates/admin_dashboard.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>管理员后台：账户列表</h2>
+<table>
+  <thead>
+    <tr>
+      <th>邮箱</th>
+      <th>是否验证</th>
+      <th>是否锁定</th>
+      <th>失败次数</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.email }}</td>
+      <td>{{ '是' if user.is_verified else '否' }}</td>
+      <td>{{ '是' if user.is_locked else '否' }}</td>
+      <td>{{ user.failed_login_attempts }}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin.toggle_lock') }}">
+          <input type="hidden" name="user_id" value="{{ user.id }}">
+          <button type="submit">{{ '解锁' if user.is_locked else '锁定' }}</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>邮箱验证</h2>
+{% if verified %}
+<p>邮箱验证成功，您可以登录系统。</p>
+{% else %}
+<p>验证失败或链接无效，请重新注册或请求新验证邮件。</p>
+{% endif %}
+{% endblock %}
