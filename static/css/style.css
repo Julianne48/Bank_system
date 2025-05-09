@@ -1,7 +1,37 @@
-body { font-family: sans-serif; margin: 0; padding: 0; }
-nav { background: #333; color: #fff; padding: 10px; }
-nav a { color: #fff; margin-right: 10px; text-decoration: none; }
-.container { padding: 20px; }
+body { font-family: sans-serif; margin: 0; padding: 0;animation: myfirst 8s;
+       animation-direction: alternate; animation-iteration-count: infinite; }
+
+nav { background: #333; color: #fff; padding: 10px;}
+nav a { color: #fff; text-decoration: none; padding: 10px;}
+.container {
+    margin: auto;
+    width: 70%;
+    text-align:center;
+    padding: 10px;
+}
+nav a:hover {background: #FFFFFF; color:#000000}
+
 table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid #ccc; padding: 5px; text-align: center; }
 .flashes { list-style: none; color: red; }
+
+a {text-decoration:none; color:#191970}
+a:hover {color:red}
+
+button {
+    background: #f44336;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: 2px solid #f44336;
+    color:#FFFFFF;
+}
+button:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+@keyframes myfirst
+{
+    from {background: #00c3ff;}
+    to {background: #ffff1c;}
+}

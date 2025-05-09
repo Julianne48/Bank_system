@@ -1,12 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>我的账户</h2>
-<a href="{{ url_for('main.open_account') }}">新建账户</a><br><br>
+<button type="button">
+<a href="{{ url_for('main.open_account') }}">新建账户</a>
+</button>
 <table>
-  <tr><th>ID</th><th>账户名称</th><th>余额</th><th>状态</th><th>操作</th></tr>
+  <p>姓名: {{ current_user.name }}</p>
+  <p>手机号: {{ current_user.phone_number }}</p>
+  <p>性别: {{ current_user.gender }}</p>
+  <p>身份证号: {{ current_user.id_card }}</p>
+  <p>学号: {{ current_user.student_number }}</p>
+  <tr><th>银行卡号</th><th>账户名称</th><th>余额</th><th>状态</th><th>操作</th></tr>
   {% for acc in accounts %}
   <tr>
-    <td>{{ acc.id }}</td>
+    <td>{{ acc.bank_number }}</td>
     <td>{{ acc.name }}</td>
     <td>{{ acc.balance }}</td>
     <td>{{ '已锁定' if acc.is_locked else '正常' }}</td>
