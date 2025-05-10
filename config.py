@@ -10,7 +10,9 @@ class Config:
     MAIL_PORT = int(os.environ.get('MAIL_PORT', 465))
     MAIL_USE_TLS = False  # 禁用 STARTTLS
     MAIL_USE_SSL = True  # 启用 SSL 直连
-    MAIL_USERNAME = '480866948@qq.com'
-    MAIL_PASSWORD = 'eqhsnyhpappvbhhf'
+    #使用前请更改下面两项
+    MAIL_USERNAME = 'Your Email'
+    MAIL_PASSWORD = 'Your Email authorization code'
+    
     MAIL_DEFAULT_SENDER = MAIL_USERNAME
     MAIL_DEBUG = True  # 开启邮件调试日志
